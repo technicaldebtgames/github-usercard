@@ -43,7 +43,8 @@ function generateCardFromGithubUserData(username) {
     cards.appendChild(createUserCard(response));
   })
   .catch(error => {
-    console.log('GET error with axios in getGithubUserData(' + username + ')');
+    console.log('GET error with axios in getGithubUserData(' + username + '), error is:');
+    console.log(error);
   })
   .finally(() => {
     console.log('GET axios operation complete in getGithubUserData(' + username + ') and card is generated.');
@@ -64,6 +65,12 @@ generateCardFromGithubUserData('technicaldebtgames');
 */
 
 var followersArray = ['tetondan','dustinmyers','justsml','luishrd','bigknell'];
+
+for (var i = 0; i < followersArray.length; i++) {
+
+  generateCardFromGithubUserData(followersArray[i]);
+
+}
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -118,8 +125,8 @@ function createUserCard(dataObj) {
   name.textContent = dataObj.data.name;
   userName.textContent = dataObj.data.login;
   location.textContent = dataObj.data.location;
-  profileLink.href = dataObj.data.url;
-  profileLink.textContent = dataObj.data.url;
+  profileLink.href = dataObj.data.html_url;
+  profileLink.textContent = dataObj.data.html_url;
   followers.textContent = dataObj.data.followers;
   following.textContent = dataObj.data.following;
   bio.textContent = dataObj.data.bio;
